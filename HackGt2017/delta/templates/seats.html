@@ -1,5 +1,12 @@
+<head>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <meta charset="utf-8">
+    <title>Howdy!</title>
+</head>
+<body>
 {% if seat_list %}
-    <ul>
+   <!--  <ul>
     {% for seat in seat_list %}
         <li>Seat: {{ seat.number }},
         {% if seat.profile %}
@@ -8,7 +15,17 @@
 		Not Taken </li>
 		{% endif %}
     {% endfor %}
+    </ul> -->
+    <ul>
+    	{% for seat in seat_list%}
+    		<li>
+    			<button type="button" class="btn {% if seat.profile %} btn-primary {% else %} btn-sceondary {% endif %}">
+    				{{ seat.number}}	
+    			</button>
+    		</li>
+    	{% endfor %}
     </ul>
 {% else %}
 <h1>NO SEAT INFORMATION</h1>
 {% endif %}
+</body>
