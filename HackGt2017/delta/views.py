@@ -14,3 +14,9 @@ class HomePageView(TemplateView):
 
 class AboutPageView(TemplateView):
 	template_name = "about.html"
+
+def surveyProcess(request):
+	Profile(talk = request.POST['talk'], sleep = request.POST['sleep'],
+		drink = request.POST['drink'], child = request.POST['child'],
+		username = request.POST['name']).save()
+	return HttpResponseRedirect("about")

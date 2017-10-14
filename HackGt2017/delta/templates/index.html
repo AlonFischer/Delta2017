@@ -8,11 +8,24 @@
         <title>Howdy!</title>
     </head>
     <body>
-        <h1>Howdy! I am Learning Django!</h1>
-        <form>
-        	<input type="radio" name="choice" id="choice" value="HI">HI
-        	<input type="radio" name="choice1" id="choice1" value="BYE">BYE
-        </form>
-     <a href="/about/">About Me</a>
+		Hey, who u?
+	<form action=”process” method=”post”>
+	{% csrf_token %}
+	Talk:
+    	<input type="radio" name="talk" id="choice1" value="True">True
+		<input type="radio" name="talk" id="choice2" value="False">False</br>
+	Sleep:
+    	<input type="radio" name="sleep" id="choice1" value="True">True
+		<input type="radio" name="sleep" id="choice2" value="False">False</br>
+	Drink:
+    	<input type="radio" name="drink" id="choice1" value="True">True
+		<input type="radio" name="drink" id="choice2" value="False">False</br>
+	Child:
+    	<input type="radio" name="child" id="choice1" value="True">True
+		<input type="radio" name="child" id="choice2" value="False">False</br>
+ 	Name:
+	<input type="text" name="name" /> <br />
+    <input type="submit" value="Vote" />
+</form>
     </body>
 </html>
