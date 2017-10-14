@@ -1,10 +1,19 @@
+{% load staticfiles %}
 <head>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/seats.css' %}">
     <meta charset="utf-8">
     <title>Howdy!</title>
 </head>
 <body>
+    <div>
+            <div class="page-header">
+        <h1><a href="/">What Kind Of Flier Are You?</a></h1>
+        </div>
+        <img src="{%static 'Delta-Logo.jpg' %}" style="margin-left: -10px; width:350px;height:75px;">
+        <h2><a>Please Select Your Seat:</a></h2>
+        <h3><a>Hover Over Seat To See Preferences</a></h3>
 {% if seat_list %}
    <!--  <ul>
     {% for seat in seat_list %}
