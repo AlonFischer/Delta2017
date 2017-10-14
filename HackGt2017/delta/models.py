@@ -17,6 +17,7 @@ class Seat(models.Model):
 	profile = models.ForeignKey(
 			'Profile',
 			on_delete=models.SET_NULL,
-			null=True
+			null=True,
+			blank=True
 		)
 
