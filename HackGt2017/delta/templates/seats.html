@@ -22,6 +22,7 @@
     			<button type="button" class="btn {% if seat.profile %} btn-primary {% else %} btn-sceondary {% endif %}">
     				{{ seat.number}}	
     			</button>
+                {% if seat.profile %} Talk: {{seat.profile.talk}}, Drink: {{seat.profile.drink}}, Sleep: {{seat.profile.sleep}}, Child: {{seat.profile.child}} {% endif %}
     		</li>
     	{% endfor %}
     </ul>
