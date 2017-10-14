@@ -1,0 +1,14 @@
+{% if seat_list %}
+    <ul>
+    {% for seat in seat_list %}
+        <li>Seat: {{ seat.number }},
+        {% if seat.profile %}
+		Name: {{seat.profile.username}}, Talk: {{seat.profile.talk}}, Drink: {{seat.profile.drink}}, Sleep: {{seat.profile.sleep}}, Child: {{seat.profile.child}}</li>
+		{% else %}
+		Not Taken </li>
+		{% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+<h1>NO SEAT INFORMATION</h1>
+{% endif %}

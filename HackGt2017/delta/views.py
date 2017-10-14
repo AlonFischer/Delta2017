@@ -21,4 +21,9 @@ def surveyProcess(request):
 	Profile(talk = request.POST['talk'], sleep = request.POST['sleep'],
 		drink = request.POST['drink'], child = request.POST['child'],
 		username = request.POST['name']).save()
-	return HttpResponseRedirect("about")
+	return HttpResponseRedirect("seats")
+
+def seatSelection(request):
+	seat_list = Seat.objects.order_by('number')
+	context = {"seat_list" : seat_list}
+	return render(request, 'seats.html', context)
