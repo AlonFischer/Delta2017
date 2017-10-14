@@ -1,31 +1,39 @@
 <!-- howdy/templates/index.html -->
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
     <head>
     	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="{% static 'css/index.css' %}">
         <meta charset="utf-8">
-        <title>Howdy!</title>
+        <title>Profile</title>
     </head>
     <body>
-		Hey, who u?
+    	<div>
+    		<div class="page-header">
+    	<h1><a href="/">What Kind Of Flier Are You?</a></h1>
+		</div>
+		<img src="{%static 'Delta-Logo.jpg' %}" style="margin-left: -70px; width:350px;height:75px;">
+		<h2><a>Please Fill Out Survey:</a></h2>
 	<form action="process" method="post">
 	{% csrf_token %}
+	Name:
+		<input type="text" name="name" /><br />
 	Talk:
-    	<input type="radio" name="talk" id="choice1" value="True">True
-		<input type="radio" name="talk" id="choice2" value="False">False</br>
+    	<input type="radio" name="talk" id="choice1" value="True"> True
+		<input type="radio" name="talk" id="choice2" value="False"> False
+	</br>
 	Sleep:
-    	<input type="radio" name="sleep" id="choice1" value="True">True
-		<input type="radio" name="sleep" id="choice2" value="False">False</br>
+    	<input type="radio" name="sleep" id="choice1" value="True"> True
+		<input type="radio" name="sleep" id="choice2" value="False"> False</br>
 	Drink:
-    	<input type="radio" name="drink" id="choice1" value="True">True
-		<input type="radio" name="drink" id="choice2" value="False">False</br>
+    	<input type="radio" name="drink" id="choice1" value="True"> True
+		<input type="radio" name="drink" id="choice2" value="False"> False</br>
 	Child:
-    	<input type="radio" name="child" id="choice1" value="True">True
-		<input type="radio" name="child" id="choice2" value="False">False</br>
- 	Name:
-	<input type="text" name="name" /> <br />
-    <input type="submit" value="Vote" />
+    	<input type="radio" name="child" id="choice1" value="True"> True
+		<input type="radio" name="child" id="choice2" value="False"> False</br>
+    <input type="submit" value="Vote"/>
 </form>
     </body>
 </html>
