@@ -30,10 +30,11 @@ def surveyProcess(request):
 	for x in range(len(seat_list)):
 		if seat_list[x].profile:
 			comp[seat_list[x].number] = []
-			if x-1 >= 0 and seat_list[x-1].profile:
+			if x-1 >= 0 and not seat_list[x-1].profile:
 				comp[seat_list[x].number].append(seat_list[x-1].number)
-			if x+1 < len(seat_list) and seat_list[x+1].profile:
+			if x+1 < len(seat_list) and not seat_list[x+1].profile:
 				comp[seat_list[x].number].append(seat_list[x+1].number)
+	print(comp)
 
 	rec_list = recSelect(comp, seat_list, p)
 		 
@@ -42,18 +43,24 @@ def surveyProcess(request):
 
 def recSelect(dict, seat_list, profile):
 	rec_list = {}
+	print("Profile info: User:%s, Talk:%s, Child:%s, Sleep:%s, Drink:%s", profile.username, profile.talk, profile.child, profile.sleep, profile.drink)
 	for y in dict.keys():
 		taken = seat_list[y-1].profile
-		percent_match = ((1 if (taken.talk == profile.talk) else 0) + (1 if (taken.sleep == profile.sleep) else 0) + 
-						(1 if (taken.drink == profile.drink)else 0) + (1 if (taken.child== profile.sleep)else 0)) / 4.0
+		print("Taken seat info: User:%s, Talk:%s, Child:%s, Sleep:%s, Drink:%s", taken.username, taken.talk, taken.child, taken.sleep, taken.drink)
+		print(taken.talk == profile.talk)
+		#print(taken.talk == profile.talk, (1 if (taken.talk == profile.talk) else 0))
+		# print(taken.talk == equal profile.talk, taken.sleep == profile.sleep, taken.drink == profile.drink,taken.child == profile.child,  (1 if (taken.talk == profile.talk) else 0), (1 if (taken.sleep == profile.sleep) else 0), (1 if (taken.drink == profile.drink) else 0), (1 if (taken.child == profile.child) else 0))
+		percent_match = ((1 if (taken.talk and profile.talk) else 0) + (1 if (taken.sleep and profile.sleep) else 0) + 
+						(1 if (taken.drink and profile.drink) else 0) + (1 if (taken.child and profile.child) else 0)) / 4.0
+		print("Match rating:", percent_match)
 		for open_seat in dict[y]:
-			if rec_list[open_seat]:
+			if open_seat in rec_list:
 				rec_list[open_seat] = (rec_list[open_seat] + percent_match) / 2.0
 			else:
 				rec_list[open_seat] = percent_match
+	print(rec_list)
 	for x in range(1, len(seat_list)+1):
 		if not x in rec_list:
-			rec_list[x] = 1
-	print("test")
+			rec_list[x] = 1.0
 	print(rec_list)
 	return rec_list 
