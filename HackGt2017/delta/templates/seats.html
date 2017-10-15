@@ -39,4 +39,11 @@
 {% else %}
 <h1>NO SEAT INFORMATION</h1>
 {% endif %}
+{% if rec_list %}
+    <ul>
+        {% for rec, match in rec_list.items %}
+        <li>Seat {{rec}}: {{match}}%</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 </body>
