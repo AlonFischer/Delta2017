@@ -47,11 +47,11 @@ def recSelect(dict, seat_list, profile):
 	for y in dict.keys():
 		taken = seat_list[y-1].profile
 		print("Taken seat info: User:%s, Talk:%s, Child:%s, Sleep:%s, Drink:%s", taken.username, taken.talk, taken.child, taken.sleep, taken.drink)
-		print(taken.talk == profile.talk)
+		print(taken.talk == (profile.talk == "True"))
 		#print(taken.talk == profile.talk, (1 if (taken.talk == profile.talk) else 0))
 		# print(taken.talk == equal profile.talk, taken.sleep == profile.sleep, taken.drink == profile.drink,taken.child == profile.child,  (1 if (taken.talk == profile.talk) else 0), (1 if (taken.sleep == profile.sleep) else 0), (1 if (taken.drink == profile.drink) else 0), (1 if (taken.child == profile.child) else 0))
-		percent_match = ((1 if (taken.talk and profile.talk) else 0) + (1 if (taken.sleep and profile.sleep) else 0) + 
-						(1 if (taken.drink and profile.drink) else 0) + (1 if (taken.child and profile.child) else 0)) / 4.0
+		percent_match = ((1 if (taken.talk == (profile.talk == "True")) else 0) + (1 if (taken.sleep == (profile.sleep == "True")) else 0) + 
+						(1 if (taken.drink == (profile.drink == "True")) else 0) + (1 if (taken.child == (profile.child == "True")) else 0)) / 4.0
 		print("Match rating:", percent_match)
 		for open_seat in dict[y]:
 			if open_seat in rec_list:
