@@ -22,9 +22,7 @@ def surveyProcess(request):
 		drink = request.POST['drink'], child = request.POST['child'],
 		username = request.POST['name'])
 	p.save()
-# 	return HttpResponseRedirect("seats")
 
-# def seatSelection(request):
 	seat_list = Seat.objects.order_by('number')
 	comp = {}
 	for x in range(len(seat_list)):
@@ -38,7 +36,7 @@ def surveyProcess(request):
 
 	rec_list = recSelect(comp, seat_list, p)
 		 
-	context = {"seat_list" : seat_list, "rec_list": rec_list}
+	context = {"seat_list" : seat_list, "rec_list": rec_list, "profile": p}
 	return render(request, 'seats.html', context)
 
 def recSelect(dict, seat_list, profile):
@@ -62,3 +60,14 @@ def recSelect(dict, seat_list, profile):
 			rec_list[x] = 1.0
 	print(rec_list)
 	return rec_list 
+
+def seatFinish(request):
+	# s = Seat(number=request.POST["number"], profile=request.POST["profile"])
+	# s.save()
+	print("profile", request.POST["profile"], "seat", request.POST["seat"])
+	p = Profile.objects.get(id=request.POST["profile"])
+	s = Seat.objects.get(number=request.POST["seat"])
+	s.profile = p
+	s.save()
+
+	return HttpResponseRedirect('/')

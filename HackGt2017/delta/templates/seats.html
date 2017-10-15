@@ -4,16 +4,17 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/seats.css' %}">
     <meta charset="utf-8">
-    <title>Howdy!</title>
+    <title>Delta Flier Survey</title>
 </head>
 <body>
-    <div>
+    <div class="container">
             <div class="page-header">
         <h1><a href="/">What Kind Of Flier Are You?</a></h1>
         </div>
         <img src="{%static 'Delta-Logo.jpg' %}" style="margin-left: -10px; width:350px;height:75px;">
         <h2><a>Please Select Your Seat:</a></h2>
         <h3><a>Hover Over Seat To See Preferences</a></h3>
+        </div>
 {% if seat_list %}
    <!--  <ul>
     {% for seat in seat_list %}
@@ -30,21 +31,35 @@
         <ul>
             
         	{% for seat, match in rec_list.items %}
+                
                 <div class="btn-group">
-        			<button type="button" class="btn btn-block  {% if seat.profile %} btn-secondary disabled {% else %} {% if match == 1.0 %} btn-success {% elif match >= .75 %} btn-primary {% elif match >= .50 %} btn-info {% elif match >= .25 %} btn-warning {% elif match >= 0 %} btn-danger {% endif %} {% endif %}" title = "{% if seat.profile %} Talk: {{seat.profile.talk}}, Drink: {{seat.profile.drink}}, Sleep: {{seat.profile.sleep}}, Child: {{seat.profile.child}} {% endif %}">
+                    <form class="{% if seat.number|divisibleby:'3' %}spaced{% endif %}" action="submit" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="profile" value="{{profile.id}}">
+        			<button type="submit" class="btn btn-block  {% if seat.profile %} btn-secondary {% else %} {% if match == 1.0 %} btn-success {% elif match >= .75 %} btn-primary {% elif match >= .50 %} btn-info {% elif match >= .25 %} btn-warning {% elif match >= 0 %} btn-danger {% endif %} {% endif %}" title="{% if seat.profile %} Talk: {{seat.profile.talk}}, Drink: {{seat.profile.drink}}, Sleep: {{seat.profile.sleep}}, Child: {{seat.profile.child}} {% endif %}" name="seat" value="{{seat.number}}">
                        
-        				{{ seat.number}}
+        				{% if seat.number < 10 %}0{% endif %}{{ seat.number}}
                         
         			</button>
-                    </div>
+                    </form>
+                </div>
                     {% if seat.number|divisibleby:"6" %}
                     </br>
-                </div>
                     {% endif %}
         	{% endfor %}
+            
         </ul>
-        div.
+        <div class="row">
+            <div class="table-border center">
+            <button class="btn btn-secondary"></button> Taken Seat <br>
+            <button class="btn btn-success"></button> 100% Match <br>
+            <button class="btn btn-primary"></button> >75% Match <br>
+            <button class="btn btn-info"></button> >50% Macth <br>
+            <button class="btn btn-warning"> </button> >25% Match<br>
+            <button class="btn btn-danger"></button>  0% Match!
+        </div>
     </div>
+
 {% else %}
 <h1>NO SEAT INFORMATION</h1>
 {% endif %}

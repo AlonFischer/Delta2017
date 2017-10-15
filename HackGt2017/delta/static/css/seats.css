@@ -41,6 +41,18 @@
 .post h1 a, .post h1 a:visited {
     color: #000000;
 }
+
+.center {
+    margin: auto;
+    width: 25%;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+.spaced {
+    padding-right: 30px;
+}
+
 h1 a {
 	color: #c8102e;
 
