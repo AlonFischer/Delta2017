@@ -28,13 +28,13 @@ def surveyProcess(request):
 	seat_list = Seat.objects.order_by('number')
 	comp = {}
 	for x in range(len(seat_list)):
+		print(seat_list[x])
 		if seat_list[x].profile:
-			comp[seat_list[x].number] = []
+			comp[seat_list[x]] = []
 			if x-1 >= 0 and not seat_list[x-1].profile:
-				comp[seat_list[x].number].append(seat_list[x-1].number)
+				comp[seat_list[x]].append(seat_list[x-1])
 			if x+1 < len(seat_list) and not seat_list[x+1].profile:
-				comp[seat_list[x].number].append(seat_list[x+1].number)
-	print(comp)
+				comp[seat_list[x]].append(seat_list[x+1])
 
 	rec_list = recSelect(comp, seat_list, p)
 		 
@@ -45,7 +45,7 @@ def recSelect(dict, seat_list, profile):
 	rec_list = {}
 	print("Profile info: User:%s, Talk:%s, Child:%s, Sleep:%s, Drink:%s", profile.username, profile.talk, profile.child, profile.sleep, profile.drink)
 	for y in dict.keys():
-		taken = seat_list[y-1].profile
+		taken = y.profile
 		print("Taken seat info: User:%s, Talk:%s, Child:%s, Sleep:%s, Drink:%s", taken.username, taken.talk, taken.child, taken.sleep, taken.drink)
 		print(taken.talk == (profile.talk == "True"))
 		percent_match = ((1 if (taken.talk == (profile.talk == "True")) else 0) + (1 if (taken.sleep == (profile.sleep == "True")) else 0) + 
@@ -57,7 +57,7 @@ def recSelect(dict, seat_list, profile):
 			else:
 				rec_list[open_seat] = percent_match
 	print(rec_list)
-	for x in range(1, len(seat_list)+1):
+	for x in seat_list:
 		if not x in rec_list:
 			rec_list[x] = 1.0
 	print(rec_list)

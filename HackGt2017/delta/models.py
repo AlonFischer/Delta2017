@@ -20,4 +20,6 @@ class Seat(models.Model):
 			null=True,
 			blank=True
 		)
+	def getnum():
+		return self.number
 
