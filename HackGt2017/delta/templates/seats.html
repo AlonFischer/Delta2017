@@ -27,9 +27,10 @@
     </ul> -->
     <ul>
     	{% for seat in seat_list%}
-    		
-    			<button type="button" class="btn {% if seat.profile %} btn-primary {% else %} btn-sceondary {% endif %}" title = "{% if seat.profile %} Talk: {{seat.profile.talk}}, Drink: {{seat.profile.drink}}, Sleep: {{seat.profile.sleep}}, Child: {{seat.profile.child}} {% endif %}">
-    				{{ seat.number}}	
+    			<button type="button" class="btn {% if profile %} btn-warning {% else %} {% if rec_list.number == 1.0 %} btn-primary {% elif rec_list.number == .75 %} btn-sceondary {% endif %} {% endif %}" title = "{% if profile %} Talk: {{profile.talk}}, Drink: {{profile.drink}}, Sleep: {{profile.sleep}}, Child: {{profile.child}} {% endif %}">
+                    {% with n=seat.number %}
+    				{{ seat.number}} Match: {{rec_list.n}}
+                    {% endwith %}
     			</button>
                 {% if seat.number|divisibleby:"5" %}
                     </br>
@@ -39,11 +40,11 @@
 {% else %}
 <h1>NO SEAT INFORMATION</h1>
 {% endif %}
-{% if rec_list %}
+<!--{% if rec_list %}
     <ul>
         {% for rec, match in rec_list.items %}
         <li>Seat {{rec}}: {{match}}%</li>
         {% endfor %}
     </ul>
-{% endif %}
+{% endif %}!-->
 </body>
