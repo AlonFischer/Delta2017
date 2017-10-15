@@ -35,9 +35,9 @@ def surveyProcess(request):
 			if x+1 < len(seat_list) and seat_list[x+1].profile:
 				comp[seat_list[x].number].append(seat_list[x+1].number)
 
-	rec_list = recSelect(comp, seat_list, profile)
+	rec_list = recSelect(comp, seat_list, p)
 		 
-	context = {"seat_list" : seat_list}
+	context = {"seat_list" : seat_list, "rec_list": rec_list}
 	return render(request, 'seats.html', context)
 
 def recSelect(dict, seat_list, profile):
@@ -51,7 +51,9 @@ def recSelect(dict, seat_list, profile):
 				rec_list[open_seat] = (rec_list[open_seat] + percent_match) / 2.0
 			else:
 				rec_list[open_seat] = percent_match
-	for x in range(1, len(seat_list) +1):
-		if not rec_list[x]:
+	for x in range(1, len(seat_list)+1):
+		if not x in rec_list:
 			rec_list[x] = 1
+	print("test")
+	print(rec_list)
 	return rec_list 
